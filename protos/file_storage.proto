@@ -1,0 +1,41 @@
+syntax = "proto3";
+package file_storage;
+
+service FileStorage {
+    rpc SendFile(stream FileSendRequest) returns (stream FileSendResponse) {}
+}
+
+message FileSendRequest {
+    oneof command {
+        FileSendStart start = 1;
+        FileSendEnd end = 2;
+    }
+}
+
+message FileSendResponse {
+    oneof response {
+        FileSendReady ready = 1;
+        FileSendAck ack = 2;
+    }
+}
+
+message FileSendStart {
+    uint32 udp_port = 1;
+}
+
+message FileSendEnd {
+    string filename = 1;
+}
+
+message FileSendReady {
+    uint32 max_chunk_size = 1;
+}
+
+message FileSendAck {
+    uint64 offset = 1;
+}
+
+message FileChunkMessage {
+    uint64 offset = 1;
+    bytes data = 2;
+}
