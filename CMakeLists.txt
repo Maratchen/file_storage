@@ -11,42 +11,13 @@ option(FILE_STORAGE_BUIILD_PACKAGE "Build package" ${PROJECT_IS_TOP_LEVEL})
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
 
-list(APPEND CONAN_INSTAL_PACKAGES
-            asio-grpc/2.1.0
-            spdlog/1.10.0)
-
-if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
-  message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-  file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/0.18.1/conan.cmake"
-                "${CMAKE_BINARY_DIR}/conan.cmake"
-                TLS_VERIFY ON)
-endif()
-
-include(${CMAKE_BINARY_DIR}/conan.cmake)
-
-conan_cmake_configure(REQUIRES ${CONAN_INSTAL_PACKAGES}
-                      GENERATORS cmake_find_package
-                      IMPORTS "bin, protoc* -> ./build_tools"
-                      IMPORTS "bin, grpc_cpp_plugin* -> ./build_tools")
-
-conan_cmake_autodetect(settings)
-
-conan_cmake_install(PATH_OR_REFERENCE .
-                    BUILD missing
-                    REMOTE conancenter
-                    SETTINGS ${settings})
-
+find_package(asio-grpc REQUIRED)
 find_package(Boost REQUIRED
              COMPONENTS program_options
                         serialization)
-
 find_package(gRPC)
-
 find_package(Protobuf REQUIRED)
-include_directories(${PROTOBUF_INCLUDE_DIRS})
-
-find_package(asio-grpc REQUIRED)
-find_package(spdlog)
+find_package(spdlog REQUIRED)
 
 add_subdirectory(protos)
 

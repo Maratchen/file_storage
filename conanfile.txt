@@ -1,0 +1,6 @@
+[requires]
+asio-grpc/2.1.0
+spdlog/1.10.0
+
+[generators]
+cmake_find_packages

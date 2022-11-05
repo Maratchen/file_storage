@@ -23,3 +23,11 @@ If during the timeout (parameter 5) no confirmation is received for the packet, 
 
 The server, after establishing a client connection via TCP, receiving the file name and udp port, opens an udp socket and starts receiving udp packets outgoing from the client's IP address and the port transmitted by the client.
 For each received udp packet, the server sends an acknowledgment via a tcp socket to the client. Received packets are stored in memory. After receiving a notification from the client about the end of the transfer (all packets are acknowledged on the client), the server saves the file to the directory (parameter 3).
+
+# How to build
+1. Create a build directory to store the build artefacts.
+> mkdir build && cd build
+2. Prepare all dependencies. Using conan or other package manager is recommended.
+> conan install --build=missing ..
+3. Build the project.
+> cmake .. && cmake --build .
