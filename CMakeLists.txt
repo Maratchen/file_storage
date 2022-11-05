@@ -24,8 +24,7 @@ add_subdirectory(protos)
 add_library(file_storage_common)
 
 target_include_directories(file_storage_common
-                           PUBLIC include
-                           PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")
+                           PUBLIC include)
 
 target_sources(file_storage_common
                PRIVATE src/client/file_reader.cpp
@@ -40,9 +39,7 @@ target_sources(file_storage_common
                        src/server/udp_receiver.cpp
                        src/client.cpp
                        src/context.cpp
-                       src/server.cpp
-                       "${FILE_STORAGE_PROTO_SOURCES}"
-                       "${FILE_STORAGE_GRPC_SOURCES}")
+                       src/server.cpp)
 
 target_link_libraries(file_storage_common
                       PUBLIC asio-grpc::asio-grpc
