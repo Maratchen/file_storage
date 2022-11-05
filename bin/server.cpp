@@ -29,12 +29,12 @@ int main(int argc, const char* argv[]) {
 
         po::notify(options);
 
-        if (options.count("help")) {
+        if (options.contains("help")) {
             std::cout << description << "\n";
             return 0;
         }
 
-        if (!options.count("path")) {
+        if (!options.contains("path")) {
             std::cout << "path was not set.\n";
             return -1;
         }
@@ -50,7 +50,6 @@ int main(int argc, const char* argv[]) {
             << options["port"].as<uint16_t>() << "...\n";
 
         server.Run();
-        //server.Test();
     }
     catch (const std::exception& error) {
         std::cerr << "Exception: " << error.what();

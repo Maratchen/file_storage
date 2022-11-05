@@ -32,7 +32,7 @@ int main(int argc, const char* argv[]) {
 
         po::notify(options);
 
-        if (!options.count("path") || options.count("help")) {
+        if (!options.contains("path") || options.contains("help")) {
             std::cout << description << "\n";
             return 0;
         }
