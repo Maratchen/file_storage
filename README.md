@@ -28,6 +28,7 @@ For each received udp packet, the server sends an acknowledgment via a tcp socke
 1. Create a build directory to store the build artefacts.
 > mkdir build && cd build
 2. Prepare all dependencies. Using conan or other package manager is recommended.
-> conan install --build=missing ..
+> conan install .. --build=missing
 3. Build the project.
-> cmake .. && cmake --build .
+> cmake .. -DCMAKE_TOOLCHAIN_FILE=./conan_paths.cmake
+> cmake --build .

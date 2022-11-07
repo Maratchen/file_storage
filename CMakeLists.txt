@@ -8,14 +8,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 option(FILE_STORAGE_BUILD_TEST "Build unit tests" ${PROJECT_IS_TOP_LEVEL})
 option(FILE_STORAGE_BUIILD_PACKAGE "Build package" ${PROJECT_IS_TOP_LEVEL})
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
-
 find_package(asio-grpc REQUIRED)
 find_package(Boost REQUIRED
              COMPONENTS program_options
                         serialization)
-find_package(gRPC)
+find_package(gRPC REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(spdlog REQUIRED)
 
