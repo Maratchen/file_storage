@@ -6,13 +6,15 @@ The task is to write two console applications Client and Server that exchange fi
 The first parameter is IP, the second is the port number, the third is the directory for storing files.
 The server starts listening on the IP address of the port and waits for the client to connect via TCP.
 Example:
-> Server.exe 127.0.0.1 5555 temp
-
+```console
+Server.exe 127.0.0.1 5555 temp
+```
 ## 2. Client.
 Running with 5 parameters. Parameters 1 and 2 are IP address and port for connecting to the server. The third is the port for sending UDP packets. The fourth is the path to the file. The fifth one is the timeout for acknowledgment of UDP packets in milliseconds.
 Example:
-> Client.exe 127.0.0.1 5555 6000 test.txt 500
-
+```console
+Client.exe 127.0.0.1 5555 6000 test.txt 500
+```
 ## 3. Interaction between server and client.
 At the beginning, the server opens a TCP socket with the IP address and port from the command parameters (parameters 1 and 2), takes it to listen and waits for connections from the client.
 
@@ -26,9 +28,15 @@ For each received udp packet, the server sends an acknowledgment via a tcp socke
 
 # How to build
 1. Create a build directory to store the build artefacts.
-> mkdir build && cd build
+```console
+mkdir build && cd build
+```
 2. Prepare all dependencies. Using conan or other package manager is recommended.
-> conan install .. --build=missing
+```console
+conan install .. --build=missing
+```
 3. Build the project.
-> cmake .. -DCMAKE_TOOLCHAIN_FILE=./conan_paths.cmake
-> cmake --build .
+```console
+cmake .. -DCMAKE_TOOLCHAIN_FILE=./conan_paths.cmake
+cmake --build .
+```
