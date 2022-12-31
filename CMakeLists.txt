@@ -38,6 +38,11 @@ target_sources(file_storage_common
                        src/context.cpp
                        src/server.cpp)
 
+target_compile_options(file_storage_common
+                       PUBLIC $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+                              $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>
+)
+
 target_link_libraries(file_storage_common
                       PUBLIC asio-grpc::asio-grpc
                              file_storage_protos

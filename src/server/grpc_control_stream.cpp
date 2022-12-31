@@ -18,8 +18,8 @@ namespace file_storage::server {
     class GrpcControlStream : public ControlStream {
     public:
         GrpcControlStream(
-            std::unique_ptr<AsyncStream>&& stream,
-            std::shared_ptr<GrpcContext> context
+            std::shared_ptr<GrpcContext>&& context,
+            std::unique_ptr<AsyncStream>&& stream
         );
         auto Read(FileSendRequest& request) -> asio::awaitable<bool> override;
         auto Write(FileSendResponse& response) -> asio::awaitable<bool> override;
@@ -41,16 +41,16 @@ namespace file_storage::server {
             throw std::runtime_error("grpc: failed to get request");
         }
         co_return std::make_unique<GrpcControlStream>(
-            std::move(stream), shared_from_this()
+            shared_from_this(), std::move(stream)
         );
     }
 
     GrpcControlStream::GrpcControlStream(
-        std::unique_ptr<AsyncStream>&& stream,
-        std::shared_ptr<GrpcContext> context
+        std::shared_ptr<GrpcContext>&& context,
+        std::unique_ptr<AsyncStream>&& stream
     )
-        : stream_(std::move(stream))
-        , context_(std::move(context))
+        : context_(std::move(context))
+        , stream_(std::move(stream))
     {
     }
 
